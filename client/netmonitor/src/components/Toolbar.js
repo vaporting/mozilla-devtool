@@ -116,6 +116,7 @@ class Toolbar extends Component {
       return;
     }
     this.props.toggleRequestFilterType(evt.target.dataset.key);
+    this.props.toggleNetworkDetails();
   }
 
   updatePersistentLogsEnabled() {
