@@ -73,6 +73,7 @@ class Toolbar extends Component {
       browserCacheDisabled: PropTypes.bool.isRequired,
       toggleRequestFilterType: PropTypes.func.isRequired,
       filteredRequests: PropTypes.array.isRequired,
+      toggleNetworkDetailsBySelectedRequest: PropTypes.func.isRequired,
     };
   }
 
@@ -116,7 +117,7 @@ class Toolbar extends Component {
       return;
     }
     this.props.toggleRequestFilterType(evt.target.dataset.key);
-    this.props.toggleNetworkDetails();
+    this.props.toggleNetworkDetailsBySelectedRequest();
   }
 
   updatePersistentLogsEnabled() {
@@ -156,6 +157,7 @@ class Toolbar extends Component {
       toggleBrowserCache,
       browserCacheDisabled,
       recording,
+      toggleNetworkDetailsBySelectedRequest,
     } = this.props;
 
     // Render list of filter-buttons.
@@ -286,5 +288,6 @@ module.exports = connect(
     toggleRecording: () => dispatch(Actions.toggleRecording()),
     togglePersistentLogs: () => dispatch(Actions.togglePersistentLogs()),
     toggleRequestFilterType: (type) => dispatch(Actions.toggleRequestFilterType(type)),
+    toggleNetworkDetailsBySelectedRequest: () => dispatch(Actions.toggleNetworkDetailsBySelectedRequest()),
   }),
 )(Toolbar);

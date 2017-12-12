@@ -15,6 +15,9 @@ const {
   TOGGLE_COLUMN,
   WATERFALL_RESIZE,
 } = require("../constants");
+const {
+  isSelectedRequestVisible,
+}= require("../selectors/index");
 
 /**
  * Change network details panel.
@@ -121,6 +124,15 @@ function toggleNetworkDetails() {
 }
 
 /**
+ * Toggle network details panel by checking selected request is visible or not.
+ */
+function toggleNetworkDetailsBySelectedRequest() {
+  return (dispatch, getState) =>
+    dispatch(openNetworkDetails(isSelectedRequestVisible(getState())
+                                &&getState().ui.networkDetailsOpen));
+}
+
+/**
  * Toggle persistent logs status.
  */
 function togglePersistentLogs() {
@@ -157,4 +169,5 @@ module.exports = {
   togglePersistentLogs,
   toggleBrowserCache,
   toggleStatistics,
+  toggleNetworkDetailsBySelectedRequest,
 };
