@@ -84,6 +84,7 @@ class Toolbar extends Component {
     this.toggleRequestFilterType = this.toggleRequestFilterType.bind(this);
     this.updatePersistentLogsEnabled = this.updatePersistentLogsEnabled.bind(this);
     this.updateBrowserCacheDisabled = this.updateBrowserCacheDisabled.bind(this);
+    this.updateRequestFilterText = this.updateRequestFilterText.bind(this);
   }
 
   componentDidMount() {
@@ -128,6 +129,11 @@ class Toolbar extends Component {
   updateBrowserCacheDisabled() {
     this.props.disableBrowserCache(
       Services.prefs.getBoolPref(DEVTOOLS_DISABLE_CACHE_PREF));
+  }
+
+  updateRequestFilterText(text) {
+    this.props.setRequestFilterText(text);
+    this.props.toggleNetworkDetailsBySelectedRequest();
   }
 
   autocompleteProvider(filter) {
@@ -251,7 +257,7 @@ class Toolbar extends Component {
             placeholder: SEARCH_PLACE_HOLDER,
             type: "filter",
             ref: "searchbox",
-            onChange: setRequestFilterText,
+            onChange: this.updateRequestFilterText,
             onFocus: this.onSearchBoxFocus,
             autocompleteProvider: this.autocompleteProvider,
           }),
