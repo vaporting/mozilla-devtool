@@ -133,9 +133,9 @@ const getSelectedRequest = createSelector(
 const isSelectedRequestVisible = createSelector(
   state => state.requests,
   getDisplayedRequests,
-  ({ requests }, displayedRequests) => {
+  ({ selectedId }, displayedRequests) => {
     let arr = displayedRequests;
-    return arr.some(r => r.id == requests.selectedId)
+    return arr.some(r => r.id == selectedId)
   }
 )
 
