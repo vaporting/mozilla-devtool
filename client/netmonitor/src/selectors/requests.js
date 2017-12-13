@@ -131,12 +131,13 @@ const getSelectedRequest = createSelector(
 );
 
 const isSelectedRequestVisible = createSelector(
-  state => state,
-  state => {
-    let arr = getDisplayedRequests(state);
-    return arr.some(r => r.id == state.requests.selectedId)
+  state => state.requests,
+  getDisplayedRequests,
+  ({ requests }, displayedRequests) => {
+    let arr = displayedRequests;
+    return arr.some(r => r.id == requests.selectedId)
   }
-);
+)
 
 function getRequestById(state, id) {
   return state.requests.requests.get(id);
